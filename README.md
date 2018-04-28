@@ -149,7 +149,7 @@ That's it. By adding this functionality, your application continues to work even
 when Eureka is down.
 
 For caching all available instances of a specific service, you can call `fetchInstances()` method
-which return all instances of a services, fetched from Eureka:
+which return all instances of a service, fetched from Eureka:
 
 ```php
 $instances = $client->fetchInstances("the-service");
