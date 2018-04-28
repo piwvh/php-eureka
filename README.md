@@ -114,12 +114,12 @@ $client->getConfig()->setDiscoveryStrategy(new RoundRobinStrategy());
 
 ### Local Registry and Caching
 As you know, failure is inevitable, specially in cloud-native
-or distributed applications. So, sometimes Eureka may not be available. In this case
-we should have a local registry of services to avoid propagating failures.
+or distributed applications. So, sometimes Eureka may not be available duo to the failure.
+In this case, we should have a local registry of services to avoid propagating failures.
 
 In the default behaviour, if Eureka is down, the `fetchInstance()` method fails and so
 the application throws and exception and can not continue to work. To solve this
-problem, you can create a local registry of services in your application.
+problem, you should create a local registry in your application.
 
 There is an interface called `InstanceProvider` which you can make use of.
 You should implement `getInstance()` method of this interface and return instances
