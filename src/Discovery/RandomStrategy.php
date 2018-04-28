@@ -2,15 +2,14 @@
 
 namespace Eureka\Discovery;
 
-use Eureka\Exceptions\InstanceFailureException;
 use Eureka\Interfaces\DiscoveryStrategy;
-use GuzzleHttp\Client as GuzzleClient;
 
 class RandomStrategy implements DiscoveryStrategy {
 
     public function getInstance($instances) {
-        $random = rand(0, count($instances) - 1);
+        if(count($instances) == 0)
+            return null;
 
-        return $instances[$random];
+        return $instances[rand(0, count($instances) - 1)];
     }
 }

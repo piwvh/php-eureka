@@ -4,6 +4,7 @@ namespace Eureka;
 
 use Eureka\Discovery\RandomStrategy;
 use Eureka\Interfaces\DiscoveryStrategy;
+use Eureka\Interfaces\InstanceProvider;
 
 class EurekaConfig {
 
@@ -29,6 +30,11 @@ class EurekaConfig {
      * @var DiscoveryStrategy
      */
     private $discoveryStrategy;
+
+    /**
+     * @var InstanceProvider
+     */
+    private $instanceProvider;
 
     // constructor
     public function __construct($config) {
@@ -90,6 +96,10 @@ class EurekaConfig {
         return $this->countryId;
     }
 
+    public function getDataCenterInfo() {
+        return $this->dataCenterInfo;
+    }
+
     public function getHomePageUrl() {
         return $this->homePageUrl;
     }
@@ -116,6 +126,10 @@ class EurekaConfig {
 
     public function getDiscoveryStrategy() {
         return $this->discoveryStrategy;
+    }
+
+    public function getInstanceProvider() {
+        return $this->instanceProvider;
     }
 
     // setters
@@ -155,6 +169,10 @@ class EurekaConfig {
         $this->countryId = $countryId;
     }
 
+    public function setDataCenterInfo($dataCenterInfo) {
+        $this->dataCenterInfo = $dataCenterInfo;
+    }
+
     public function setHomePageUrl($homePageUrl) {
         $this->homePageUrl = $homePageUrl;
     }
@@ -181,6 +199,10 @@ class EurekaConfig {
 
     public function setDiscoveryStrategy(DiscoveryStrategy $discoveryStrategy) {
         $this->discoveryStrategy = $discoveryStrategy;
+    }
+
+    public function setInstanceProvider(InstanceProvider $instanceProvider) {
+        $this->instanceProvider = $instanceProvider;
     }
 
     //

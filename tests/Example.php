@@ -13,6 +13,19 @@ $client = new \Eureka\EurekaClient([
     'healthCheckUrl' => 'http://localhost:8080/health'
 ]);
 
+class DummyProvider implements \Eureka\Interfaces\InstanceProvider {
+
+    public function getInstances($appName) {
+        echo "Eureka didn't respond correctly.";
+
+        $obj = new stdClass();
+        $obj->homePageUrl = "http://stackoverflow.com";
+        return [$obj];
+    }
+}
+
+$client->getConfig()->setInstanceProvider(new DummyProvider());
+
 try {
     $client->register();
     $url = $client->fetchInstance("test")->homePageUrl;

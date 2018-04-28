@@ -45,6 +45,8 @@ List of all available configuration includes:
 - `secureVipAddress`
 - `heartbeatInterval` (default: `30`)
 - `discoveryStrategy` (default: `RandomStrategy`)
+- `instanceProvider`
+
 
 You can also change configuration after creating `EurekaClient` instance, using setter methods:
 ```php
@@ -94,9 +96,10 @@ of load balancing. For example, a Round-robin or a Random strategy might be your
 
 Currently this library only supports `RandomStrategy`, but you can create your custom
 strategy by implementing `getInstance()` method of `DiscoveryStrategy` interface:
+
 ```php
 class RoundRobinStrategy implements DiscoveryStrategy {
-    
+
     public function getInstance($instances) {
         // return an instance
     }
@@ -107,4 +110,47 @@ class RoundRobinStrategy implements DiscoveryStrategy {
 Then all you have to do is to introduce your custom strategy to `EurekaClient` instance:
 ```php
 $client->getConfig()->setDiscoveryStrategy(new RoundRobinStrategy());
+```
+
+### Local Registry and Caching
+As you know, failure is inevitable, specially in cloud-native
+or distributed applications. So, sometimes Eureka may not be available. In this case
+we should have a local registry of services to avoid propagating failures.
+
+In the default behaviour, if Eureka is down, the `fetchInstance()` method fails and so
+the application throws and exception and can not continue to work. To solve this
+problem, you can create a local registry of services in your application.
+
+There is an interface called `InstanceProvider` which you can make use of.
+You should implement `getInstance()` method of this interface and return instances
+of a service based on your ideal logic.
+
+```php
+class MyProvider implements InstanceProvider {
+
+    public function getInstances($appName) { 
+        // return cached instances of the service from the database 
+    }
+}
+```
+
+In this example, we have cached to instances of the service in the database and
+are retrieving them from the database when Eureka is not available.
+
+After creating your custom provider, just make it work by:
+
+```php
+$client->getConfig()->setInstanceProvider(new MyProvider());
+```
+
+Your custom provider only gets called when Eureka is down or is not answering properly.
+
+That's it. By adding this functionality, your application continues to work even
+when Eureka is down.
+
+For caching the instances of a specific service, you can call `fetchInstances()` method
+which return all instances of a services, fetched from Eureka:
+
+```php
+$instances = $client->fetchInstances("the-service");
 ```
