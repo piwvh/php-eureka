@@ -1,6 +1,6 @@
-PHP Eureka Client
+PHP Spring Cloud Netflix Eureka Client
 =================
-A PHP client for Spring Cloud Eureka service registration and discovery.
+A PHP client for Spring Cloud Netflix Eureka service registration and discovery.
 
 
 ## Installation
