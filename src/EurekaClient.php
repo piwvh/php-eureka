@@ -15,6 +15,7 @@ class EurekaClient {
      * @var EurekaConfig
      */
     private $config;
+    private $instances;
 
     // constructor
     public function __construct($config) {
@@ -106,6 +107,10 @@ class EurekaClient {
     }
 
     public function fetchInstances($appName) {
+        if(!empty($this->instances[$appName])) {
+            return $this->instances[$appName];
+        }
+
         $client = new GuzzleClient(['base_uri' => $this->config->getEurekaDefaultUrl()]);
         $provider = $this->getConfig()->getInstanceProvider();
 
@@ -134,7 +139,9 @@ class EurekaClient {
                 throw new InstanceFailureException("No instance found for '" . $appName . "'.");
             }
 
-            return $body->application->instance;
+            $this->instances[$appName] = $body->application->instance;
+
+            return $this->instances[$appName];
         }
         catch (RequestException $e) {
             if(!empty($provider)) {
