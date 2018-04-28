@@ -134,10 +134,10 @@ class MyProvider implements InstanceProvider {
 }
 ```
 
-In this example, we have cached to instances of the service in the database and
+In this example, we have cached the instances of the service in the database and
 are retrieving them from the database when Eureka is not available.
 
-After creating your custom provider, just make it work by:
+After creating your custom provider, just make it work by adding it to the configuration:
 
 ```php
 $client->getConfig()->setInstanceProvider(new MyProvider());
