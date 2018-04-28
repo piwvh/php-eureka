@@ -81,7 +81,7 @@ configuration item:
 $client->getConfig()->setHeartbeatInterval(60); // 60 seconds
 ``` 
 
-- **Service Discovery**: fetch instances of a service from Eureka:
+- **Service Discovery**: fetch an instance of a service from Eureka:
 ```php
 $instance = $client->fetchInstance("the-service");
 $homePageUrl = $instance->homePageUrl;
