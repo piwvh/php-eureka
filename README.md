@@ -148,7 +148,7 @@ Your custom provider only gets called when Eureka is down or is not answering pr
 That's it. By adding this functionality, your application continues to work even
 when Eureka is down.
 
-For caching the instances of a specific service, you can call `fetchInstances()` method
+For caching all available instances of a specific service, you can call `fetchInstances()` method
 which return all instances of a services, fetched from Eureka:
 
 ```php
