@@ -63,7 +63,7 @@ $client->register();
 $client->deRegister();
 ```
 
-- **Heartbeat:** send heartbeat to Eureka, to determine the client is up (one time heartbeat)
+- **Heartbeat:** send heartbeat to Eureka, to determine the client is up (one-time heartbeat)
 ```php
 $client->heartbeat();
 ```
@@ -81,9 +81,9 @@ configuration item:
 $client->getConfig()->setHeartbeatInterval(60); // 60 seconds
 ``` 
 
-- **Service Discovery**: fetch instance of other services from Eureka:
+- **Service Discovery**: fetch instances of a service from Eureka:
 ```php
-$instance = $client->fetchInstance("another-service");
+$instance = $client->fetchInstance("the-service");
 $homePageUrl = $instance->homePageUrl;
 ```
 
