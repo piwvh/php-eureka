@@ -12,7 +12,7 @@ You can install this package easily using [Composer](https://getcomposer.org/
 ## Documentation
 
 ### Create Eureka Client
-The very first thing you should do is to create an instance of `EurekaClient` using your configuration:
+The very first thing you need to do is to create an instance of `EurekaClient` using your configuration:
 ```php
 $client = new EurekaClient([
     'eurekaDefaultUrl' => 'http://localhost:8761/eureka',
@@ -82,7 +82,7 @@ configuration item:
 ```php
 $client->getConfig()->setHeartbeatInterval(60); // 60 seconds
 ``` 
-
+It's obvious that this method should be used in CLI.
 - **Service Discovery**: fetch an instance of a service from Eureka:
 ```php
 $instance = $client->fetchInstance("the-service");
@@ -145,11 +145,11 @@ $client->getConfig()->setInstanceProvider(new MyProvider());
 
 Your custom provider only gets called when Eureka is down or is not answering properly.
 
-That's it. By adding this functionality, your application continues to work even
+That's it. By adding this functionality, your application keeps working even
 when Eureka is down.
 
 For caching all available instances of a specific service, you can call `fetchInstances()` method
-which return all instances of a service, fetched from Eureka:
+which fetches all of the instances of the service from Eureka:
 
 ```php
 $instances = $client->fetchInstances("the-service");
