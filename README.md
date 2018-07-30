@@ -70,7 +70,7 @@ $client->deRegister();
 $client->heartbeat();
 ```
 
-You can register your instance and sent periodic heartbeat using `start()` method:
+You can register your instance and send periodic heartbeat using `start()` method:
 ```php
 $client->start();
 ```
