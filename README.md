@@ -1,6 +1,6 @@
 PHP Netflix Eureka Client
 =========================
-A PHP client for Spring Cloud Netflix Eureka service registration and discovery.
+A PHP client for (Spring Cloud) Netflix Eureka service registration and discovery.
 
 
 ## Installation
@@ -76,8 +76,8 @@ $client->start();
 ```
 
 With this method, first your service gets registered with Eureka using the
-configuration you have provided, then a heartbeat will be sent to the Eureka periodically based
-on `heartbeatInterval` config. This interval time can be changed just like any other
+configuration you have provided, after that, a heartbeat will be sent to the Eureka periodically based
+on `heartbeatInterval` configuration value. This interval time can be changed just like any other
 configuration item:
 ```php
 $client->getConfig()->setHeartbeatInterval(60); // 60 seconds
@@ -91,7 +91,7 @@ $homePageUrl = $instance->homePageUrl;
 
 ### Discovery Strategy
 When fetching instances of a service from Eureka, you probably get a list of available
-instances registered with Eureka. You can choose one of them based on your desired strategy
+instances. You can choose one of them based on your desired strategy
 of load balancing. For example, a Round-robin or a Random strategy might be your choice.
 
 Currently this library only supports `RandomStrategy`, but you can create your custom
@@ -107,22 +107,22 @@ class RoundRobinStrategy implements DiscoveryStrategy {
 }
 ```
 
-Then all you have to do is to introduce your custom strategy to `EurekaClient` instance:
+Then all you have to do, is to introduce your custom strategy to `EurekaClient` instance:
 ```php
 $client->getConfig()->setDiscoveryStrategy(new RoundRobinStrategy());
 ```
 
 ### Local Registry and Caching
-As you know, failure is inevitable, specially in cloud-native
-or distributed applications. So, sometimes Eureka may not be available duo to the failure.
-In this case, we should have a local registry of services to avoid cascading failures.
+Failure is inevitable, specially in cloud-native
+or distributed applications. So, sometimes Eureka may not be available because of failure.
+In this cases, we should have a local registry of services to avoid cascading failures.
 
-In the default behaviour, if Eureka is down, the `fetchInstance()` method fails and so
+By default, if Eureka is down, the `fetchInstance()` method fails, so
 the application throws and exception and can not continue to work. To solve this
 problem, you should create a local registry in your application.
 
 There is an interface called `InstanceProvider` which you can make use of.
-You should implement `getInstance()` method of this interface and return instances
+You should implement `getInstances()` method of this interface and return instances
 of a service based on your ideal logic.
 
 ```php
@@ -135,7 +135,7 @@ class MyProvider implements InstanceProvider {
 ```
 
 In this example, we have cached the instances of the service in the database and
-are retrieving them from the database when Eureka is not available.
+are loading them when Eureka is down.
 
 After creating your custom provider, just make it work by adding it to the configuration:
 
