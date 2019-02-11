@@ -118,7 +118,7 @@ or distributed applications. So, sometimes Eureka may not be available because o
 In this cases, we should have a local registry of services to avoid cascading failures.
 
 By default, if Eureka is down, the `fetchInstance()` method fails, so
-the application throws and exception and can not continue to work. To solve this
+the application throws an exception and can not continue to work. To solve this
 problem, you should create a local registry in your application.
 
 There is an interface called `InstanceProvider` which you can make use of.
