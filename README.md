@@ -76,7 +76,7 @@ $client->start();
 ```
 
 With this method, first your service gets registered with Eureka using the
-configuration you have provided, after that, a heartbeat will be sent to the Eureka periodically based
+configuration you have provided. After that, a heartbeat will be sent to the Eureka periodically based
 on `heartbeatInterval` configuration value. This interval time can be changed just like any other
 configuration item:
 ```php
