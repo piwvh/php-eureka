@@ -47,6 +47,25 @@ class EurekaClient {
         }
     }
 
+    // is registered with eureka
+    public function isRegistered() {
+        $client = new GuzzleClient(['base_uri' => $this->config->getEurekaDefaultUrl()]);
+
+        try {
+            $response = $client->request('GET', '/eureka/apps/' . $this->config->getAppName() . '/' . $this->config->getInstanceId(), [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json'
+                ]
+            ]);
+            $statusCode = $response->getStatusCode();
+        } catch (Exception $ex) {
+            return false;
+        }
+
+        return $statusCode == 200;
+    }
+
     // de-register from eureka
     public function deRegister() {
         $client = new GuzzleClient(['base_uri' => $this->config->getEurekaDefaultUrl()]);
