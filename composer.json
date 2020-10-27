@@ -19,7 +19,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3|^7.0.1"
     },
     "autoload": {
         "psr-4": {
